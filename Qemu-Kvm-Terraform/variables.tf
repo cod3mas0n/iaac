@@ -16,6 +16,12 @@ variable "ssh_public_key" {
   type        = string
 }
 
+variable "network_name" {
+  description = "Network for VM"
+  type        = string
+  default     = "default"
+}
+
 variable "os_images" {
   description = "Map of OS configurations and their base images"
   type = map(object({
