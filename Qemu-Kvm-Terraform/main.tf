@@ -37,6 +37,11 @@ resource "libvirt_domain" "vm" {
   memory   = each.value.memory
   vcpu     = each.value.vcpu
 
+  # Conditional CPU block – works because all attributes are optional in the provider
+  cpu {
+    mode = try(each.value.cpu.mode, null) # null = libvirt default
+  }
+
   cloudinit = libvirt_cloudinit_disk.cloudinit[each.key].id
 
   network_interface {
